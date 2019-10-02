@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { Route, Link } from 'react-router-dom';
 import Starship from './pages/Starship/Starship';
+import { getShipList } from './services/starship-api';
 
 class App extends Component {
   
@@ -12,13 +13,18 @@ class App extends Component {
         url: 'https://deathtaco.com'},
       { model: 'Flamethrower',
         name: 'HottyHott',
-        url: 'https://hothothot.com'},
+        url: 'https://hothothot.com'}
 
     ]
   }
   
   getStarship = (idx) => {
     return this.state.starships[idx];
+  }
+
+  async componentDidMount() {
+    const allships = await getShipList();
+    this.setState({starships: allships.results})
   }
 
   render() {
@@ -32,8 +38,10 @@ class App extends Component {
           {this.state.starships.map((ship, idx) =>
             <Link
               to={`/starships/${idx}`}
+              key={ship.name}
             >
-              </Link>
+              {ship.name}
+            </Link>
           )}
         </section>
         }/>
