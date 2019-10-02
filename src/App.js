@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Route, Link } from 'react-router-dom';
+import Starship from './pages/Starship/Starship';
 
 class App extends Component {
   
@@ -8,10 +9,18 @@ class App extends Component {
     starships: [
       { model: 'TacoBuster',
         name: 'Death Taco',
-        url: 'https://deathtaco.com'}
+        url: 'https://deathtaco.com'},
+      { model: 'Flamethrower',
+        name: 'HottyHott',
+        url: 'https://hothothot.com'},
+
     ]
   }
   
+  getStarship = (idx) => {
+    return this.state.starships[idx];
+  }
+
   render() {
     return (
       <div className="App">
@@ -27,7 +36,13 @@ class App extends Component {
               </Link>
           )}
         </section>
-          }/>
+        }/>
+        <Route exact path='/starships/:idx' render={(props) =>
+          <Starship 
+          {...props}
+          getStarship={this.getStarship}
+          />
+        }/>
       </div>
     );
   }
