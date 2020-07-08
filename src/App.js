@@ -7,15 +7,7 @@ import { getShipList } from './services/starship-api';
 class App extends Component {
   
   state = {
-    starships: [
-      { model: 'TacoBuster',
-        name: 'Death Taco',
-        url: 'https://deathtaco.com'},
-      { model: 'Flamethrower',
-        name: 'HottyHott',
-        url: 'https://hothothot.com'}
-
-    ]
+    starships: []
   }
   
   getStarship = (idx) => {
